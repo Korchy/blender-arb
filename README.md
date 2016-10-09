@@ -18,5 +18,7 @@ In T-bar set values on ARB tab and press button "Set Accurate Values"
 
 ====================================================================================
 Version history:
+
 0.0.2
+
     - Added "Width-Height" checker to change border Right-Bottom coordinates to Width-Height values
