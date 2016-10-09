@@ -21,4 +21,4 @@ Version history:
 
 0.0.2
 
-    - Added "Width-Height" checker to change border Right-Bottom coordinates to Width-Height values
+- Added "Width-Height" checker to change border Right-Bottom coordinates to Width-Height values
