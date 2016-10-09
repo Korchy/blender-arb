@@ -41,10 +41,10 @@ class SetAccurateBorder(bpy.types.Operator):
         else:
             bpy.context.scene.render.border_max_x = bpy.context.scene.accurate_border_scope.x2/bpy.context.scene.render.resolution_x
             bpy.context.scene.render.border_max_y = 1-bpy.context.scene.accurate_border_scope.y2/bpy.context.scene.render.resolution_y
-            if bpy.context.scene.render.border_min_x > bpy.context.scene.render.border_max_x:
-                bpy.context.scene.render.border_max_x, bpy.context.scene.render.border_min_x = bpy.context.scene.render.border_min_x, bpy.context.scene.render.border_max_x
-            if bpy.context.scene.render.border_min_y > bpy.context.scene.render.border_max_y:
-                bpy.context.scene.render.border_max_y, bpy.context.scene.render.border_min_y = bpy.context.scene.render.border_min_y, bpy.context.scene.render.border_max_y
+        if bpy.context.scene.render.border_min_x > bpy.context.scene.render.border_max_x:
+            bpy.context.scene.render.border_max_x, bpy.context.scene.render.border_min_x = bpy.context.scene.render.border_min_x, bpy.context.scene.render.border_max_x
+        if bpy.context.scene.render.border_min_y > bpy.context.scene.render.border_max_y:
+            bpy.context.scene.render.border_max_y, bpy.context.scene.render.border_min_y = bpy.context.scene.render.border_min_y, bpy.context.scene.render.border_max_y
         bpy.context.scene.render.use_border = True
         return {'FINISHED'}
 
