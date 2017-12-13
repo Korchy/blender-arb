@@ -1,3 +1,6 @@
+# Nikita Akimov
+# interplanety@interplanety.org
+
 import bpy
 
 bl_info = {
@@ -5,10 +8,10 @@ bl_info = {
     'category': 'Render',
     'author': 'Nikita Akimov',
     'version': (0, 0, 2),
-    'blender': (2, 78, 0),
+    'blender': (2, 79, 0),
     'location': 'T-Bar > ARB tab',
-    'wiki_url': 'http://b3d.interplanety.ru/add-on-accurate-render-border/',
-    'tracker_url': 'http://b3d.interplanety.ru/add-on-accurate-render-border/',
+    'wiki_url': 'https://b3d.interplanety.org/en/accurate-render-border-add-on/',
+    'tracker_url': 'https://b3d.interplanety.org/en/accurate-render-border-add-on/',
     'description': 'Allows to set render border with accurate values'
 }
 
@@ -59,6 +62,7 @@ def AccurateBorderScopeUnsignedCheck(self, context):
         self.y2 = 0
     if self.y2 < 0:
         self.y2 = 0
+
 
 def AccurateBorderScopeTypeUpdate(self, context):
     if self.xywh:
@@ -166,6 +170,7 @@ def unregister():
     bpy.utils.unregister_class(AccurateBorderPanel)
     bpy.utils.unregister_class(AccurateBorderScope)
     bpy.utils.unregister_class(SetAccurateBorder)
+
 
 if __name__ == "__main__":
     register()
