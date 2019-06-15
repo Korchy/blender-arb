@@ -1,8 +1,5 @@
 # Nikita Akimov
 # interplanety@interplanety.org
-#
-# GitHub
-#   https://github.com/Korchy/blender_hdri_bruteforce
 
 
 import json
