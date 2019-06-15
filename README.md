@@ -14,7 +14,7 @@ User Preferences - Addons - Install from file
 
 In 3D View window - T-Panel set values on ARB tab and press button "Set Accurate Values"
 
-<img src="http://b3d.interplanety.ru/wp-content/upload_content/2016/10/00-3-400x334.jpg" title="Accurate Render Border">
+<img src="http://b3d.interplanety.org/wp-content/upload_content/2016/10/00-3-400x334.jpg" title="Accurate Render Border">
 
 **Version history:**
 

@@ -2,6 +2,7 @@
 # interplanety@interplanety.org
 
 import bpy
+from .addon import Addon
 
 bl_info = {
     'name': 'Accurate Render Border',
@@ -159,17 +160,21 @@ class AccurateBorderPanel(bpy.types.Panel):
 
 
 def register():
-    bpy.utils.register_class(SetAccurateBorder)
-    bpy.utils.register_class(AccurateBorderScope)
-    bpy.utils.register_class(AccurateBorderPanel)
-    bpy.types.Scene.accurate_border_scope = bpy.props.PointerProperty(type=AccurateBorderScope)
+    if not Addon.dev_mode():
+        bpy.utils.register_class(SetAccurateBorder)
+        bpy.utils.register_class(AccurateBorderScope)
+        bpy.utils.register_class(AccurateBorderPanel)
+        bpy.types.Scene.accurate_border_scope = bpy.props.PointerProperty(type=AccurateBorderScope)
+    else:
+        print('It seems you are trying to use the dev version of the ' + bl_info['name'] + ' add-on. It may work not properly. Please download and use the release version!')
 
 
 def unregister():
-    del bpy.types.Scene.accurate_border_scope
-    bpy.utils.unregister_class(AccurateBorderPanel)
-    bpy.utils.unregister_class(AccurateBorderScope)
-    bpy.utils.unregister_class(SetAccurateBorder)
+    if not Addon.dev_mode():
+        del bpy.types.Scene.accurate_border_scope
+        bpy.utils.unregister_class(AccurateBorderPanel)
+        bpy.utils.unregister_class(AccurateBorderScope)
+        bpy.utils.unregister_class(SetAccurateBorder)
 
 
 if __name__ == "__main__":
