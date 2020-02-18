@@ -19,24 +19,18 @@ class ACCURATE_RENDER_BORDER_PT_panel(Panel):
         layout = self.layout
         layout.prop(context.scene.accurate_region_border, 'x0')
         layout.prop(context.scene.accurate_region_border, 'y0')
-        layout.prop(context.scene.accurate_region_border, 'x1')
-        layout.prop(context.scene.accurate_region_border, 'y1')
+        if context.scene.accurate_region_border.mode == 'Top-Bottom':
+            layout.prop(context.scene.accurate_region_border, 'x1')
+            layout.prop(context.scene.accurate_region_border, 'y1')
+        else:
+            layout.prop(context.scene.accurate_region_border, 'x1', text='Width')
+            layout.prop(context.scene.accurate_region_border, 'y1', text='Height')
         split = layout.split(factor=0.9)
         col = split.column()
+        row = col.row()
+        row.prop(context.scene.accurate_region_border, 'mode', expand=True)
         col = split.column()
         col.operator('accurate_region_border.sync', icon='FILE_REFRESH', text='')
-
-        # self.layout.prop(context.window_manager.accurate_render_border_params, 'x0')
-        # self.layout.prop(context.window_manager.accurate_render_border_params, 'y0')
-        # self.layout.prop(context.window_manager.accurate_render_border_params, 'x1')
-        # self.layout.prop(context.window_manager.accurate_render_border_params, 'y1')
-        # self.layout.prop(context.window_manager.accurate_render_border_params, 'xywh')
-        # operator = self.layout.operator('accurate_render_border.main', icon='OBJECT_HIDDEN')
-        # operator.x1 = context.window_manager.accurate_render_border_params.x0
-        # operator.y1 = context.window_manager.accurate_render_border_params.y0
-        # operator.x2 = context.window_manager.accurate_render_border_params.x1
-        # operator.y2 = context.window_manager.accurate_render_border_params.y1
-        # operator.xywh = context.window_manager.accurate_render_border_params.xywh
 
 
 def register():

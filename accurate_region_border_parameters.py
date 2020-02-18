@@ -5,16 +5,13 @@
 #   https://github.com/Korchy/blender-arb
 
 import bpy
-from bpy.props import IntProperty, PointerProperty, BoolProperty
+from bpy.props import IntProperty, PointerProperty, EnumProperty
 from bpy.types import PropertyGroup
 from bpy.utils import register_class, unregister_class
 from .accurate_region_border import AccurateRegionBorder
 
 
 class ACCURATE_RENDER_BORDER_Parameters(PropertyGroup):
-
-    def max_x0(self, context):
-        return context.scene.render.resolution_x
 
     x0: IntProperty(
         name='Left-Top X',
@@ -52,10 +49,18 @@ class ACCURATE_RENDER_BORDER_Parameters(PropertyGroup):
         get=lambda self: self._y1_get(self),
         set=lambda self, value: self._y1_set(self, value)
     )
-    xywh: BoolProperty(
-        name='Width/Height',
+    mode: EnumProperty(
+        name='mode',
         description='Width-Height instead Right-Bottom coordinates',
-        default=False
+        items=[
+            ('Top-Bottom', 'Top-Bottom', 'Top-Bottom'),
+            ('Width-Height', 'Width-Height', 'Width-Height')
+        ],
+        default='Top-Bottom',
+        update=lambda self, context: self._mode_update(
+            parameter=self,
+            context=context
+        )
     )
 
     @staticmethod
@@ -96,10 +101,10 @@ class ACCURATE_RENDER_BORDER_Parameters(PropertyGroup):
 
     @staticmethod
     def _x1_set(parameter, new_value):
-        if new_value <= parameter.x0 > 0:
+        if parameter.mode == 'Top-Bottom' and new_value <= parameter.x0 > 0:
             new_value = parameter.x0
-        elif new_value >= AccurateRegionBorder.max_x(context=bpy.context):
-            new_value = AccurateRegionBorder.max_x(context=bpy.context)
+        elif new_value >= AccurateRegionBorder.max_x(context=bpy.context) - (0 if parameter.mode == 'Top-Bottom' else parameter.x0):
+            new_value = AccurateRegionBorder.max_x(context=bpy.context) - (0 if parameter.mode == 'Top-Bottom' else parameter.x0)
         parameter['x1'] = new_value
         AccurateRegionBorder.update_region_border_x1(
             border_parameters=parameter,
@@ -112,14 +117,21 @@ class ACCURATE_RENDER_BORDER_Parameters(PropertyGroup):
 
     @staticmethod
     def _y1_set(parameter, new_value):
-        if new_value <= parameter.y0 > 0:
+        if parameter.mode == 'Top-Bottom' and new_value <= parameter.y0 > 0:
             new_value = parameter.y0
-        elif new_value >= AccurateRegionBorder.max_y(context=bpy.context):
-            new_value = AccurateRegionBorder.max_y(context=bpy.context)
+        elif new_value >= AccurateRegionBorder.max_y(context=bpy.context) - (0 if parameter.mode == 'Top-Bottom' else parameter.y0):
+            new_value = AccurateRegionBorder.max_y(context=bpy.context) - (0 if parameter.mode == 'Top-Bottom' else parameter.y0)
         parameter['y1'] = new_value
         AccurateRegionBorder.update_region_border_y1(
             border_parameters=parameter,
             context=bpy.context
+        )
+
+    @staticmethod
+    def _mode_update(parameter, context):
+        AccurateRegionBorder.synchronize(
+            border_parameters=parameter,
+            context=context
         )
 
 
