@@ -5,8 +5,8 @@
 #   https://github.com/Korchy/blender-arb
 
 import bpy
-from bpy.props import IntProperty, PointerProperty, EnumProperty
-from bpy.types import PropertyGroup
+from bpy.props import IntProperty, PointerProperty, EnumProperty, CollectionProperty
+from bpy.types import Scene, PropertyGroup, WindowManager
 from bpy.utils import register_class, unregister_class
 from .accurate_region_border import AccurateRegionBorder
 
@@ -141,9 +141,13 @@ class ACCURATE_RENDER_BORDER_Parameters(PropertyGroup):
 
 def register():
     register_class(ACCURATE_RENDER_BORDER_Parameters)
-    bpy.types.Scene.accurate_region_border = PointerProperty(type=ACCURATE_RENDER_BORDER_Parameters)
+    # camera
+    Scene.accurate_region_border = PointerProperty(type=ACCURATE_RENDER_BORDER_Parameters)
+    # viewport
+    WindowManager.accurate_region_border = CollectionProperty(type=ACCURATE_RENDER_BORDER_Parameters)
 
 
 def unregister():
-    del bpy.types.Scene.accurate_region_border
+    del WindowManager.accurate_region_border
+    del Scene.accurate_region_border
     unregister_class(ACCURATE_RENDER_BORDER_Parameters)
