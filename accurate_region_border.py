@@ -55,7 +55,7 @@ class AccurateRegionBorder:
         # update border_max_x
         if border_parameters.mode == 'Top-Bottom':
             context.scene.render.border_max_x = border_parameters.x1 / cls.max_x(context=context)
-        else:
+        elif border_parameters.mode == 'Width-Height':
             context.scene.render.border_max_x = (border_parameters.x1 + border_parameters.x0) / cls.max_x(context=context)
 
     @classmethod
@@ -63,7 +63,7 @@ class AccurateRegionBorder:
         # update border_min_y
         if border_parameters.mode == 'Top-Bottom':
             context.scene.render.border_min_y = 1 - border_parameters.y1 / cls.max_y(context=context)
-        else:
+        elif border_parameters.mode == 'Width-Height':
             context.scene.render.border_min_y = 1 - (border_parameters.y1 + border_parameters.y0) / cls.max_y(context=context)
 
     @classmethod

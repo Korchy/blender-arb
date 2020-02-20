@@ -97,20 +97,19 @@ class ACCURATE_RENDER_BORDER_Parameters(PropertyGroup):
 
     @staticmethod
     def _x1_set(parameter, new_value):
-        if parameter.mode == 'Top-Bottom' and new_value <= AccurateRegionBorder.border_coordinates(context=bpy.context)['x0'] > 0:
-            new_value = AccurateRegionBorder.border_coordinates(context=bpy.context)['x0']
-        elif new_value >= AccurateRegionBorder.max_x(context=bpy.context) - (0 if parameter.mode == 'Top-Bottom' else parameter.x0):
-            new_value = AccurateRegionBorder.max_x(context=bpy.context) - (0 if parameter.mode == 'Top-Bottom' else parameter.x0)
+        if parameter.mode == 'Top-Bottom':
+            if new_value < parameter.x0:
+                new_value = parameter.x0
+            elif new_value > AccurateRegionBorder.max_x(context=bpy.context):
+                new_value = AccurateRegionBorder.max_x(context=bpy.context)
+        elif parameter.mode == 'Width-Height':
+            if new_value > AccurateRegionBorder.max_x(context=bpy.context) - parameter.x0:
+                new_value = AccurateRegionBorder.max_x(context=bpy.context) - parameter.x0
         parameter['x1'] = new_value
         AccurateRegionBorder.update_region_border_x1(
             border_parameters=parameter,
             context=bpy.context
         )
-        # if parameter.mode == 'Width-Height':
-        #     AccurateRegionBorder.synchronize(
-        #         border_parameters=parameter,
-        #         context=bpy.context
-        #     )
 
     @staticmethod
     def _y1_get(parameter):
@@ -118,20 +117,19 @@ class ACCURATE_RENDER_BORDER_Parameters(PropertyGroup):
 
     @staticmethod
     def _y1_set(parameter, new_value):
-        if parameter.mode == 'Top-Bottom' and new_value <= parameter.y0 > 0:
-            new_value = parameter.y0
-        elif new_value >= AccurateRegionBorder.max_y(context=bpy.context) - (0 if parameter.mode == 'Top-Bottom' else parameter.y0):
-            new_value = AccurateRegionBorder.max_y(context=bpy.context) - (0 if parameter.mode == 'Top-Bottom' else parameter.y0)
+        if parameter.mode == 'Top-Bottom':
+            if new_value < parameter.y0:
+                new_value = parameter.y0
+            elif new_value > AccurateRegionBorder.max_y(context=bpy.context):
+                new_value = AccurateRegionBorder.max_y(context=bpy.context)
+        elif parameter.mode == 'Width-Height':
+            if new_value > AccurateRegionBorder.max_y(context=bpy.context) - parameter.y0:
+                new_value = AccurateRegionBorder.max_y(context=bpy.context) - parameter.y0
         parameter['y1'] = new_value
         AccurateRegionBorder.update_region_border_y1(
             border_parameters=parameter,
             context=bpy.context
         )
-        # if parameter.mode == 'Width-Height':
-        #     AccurateRegionBorder.synchronize(
-        #         border_parameters=parameter,
-        #         context=bpy.context
-        #     )
 
     @staticmethod
     def _mode_update(parameter, context):
