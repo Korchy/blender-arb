@@ -9,7 +9,7 @@ from bpy.utils import register_class, unregister_class
 from .accurate_region_border import AccurateRegionBorder
 
 
-class ACCURATE_RENDER_BORDER_OT_sync(Operator):
+class ACCURATE_REGION_BORDER_OT_sync(Operator):
     bl_idname = 'accurate_region_border.sync'
     bl_label = 'Sync'
     bl_description = 'Sync accurate region border with real border values'
@@ -30,8 +30,8 @@ class ACCURATE_RENDER_BORDER_OT_sync(Operator):
 
 
 def register():
-    register_class(ACCURATE_RENDER_BORDER_OT_sync)
+    register_class(ACCURATE_REGION_BORDER_OT_sync)
 
 
 def unregister():
-    unregister_class(ACCURATE_RENDER_BORDER_OT_sync)
+    unregister_class(ACCURATE_REGION_BORDER_OT_sync)

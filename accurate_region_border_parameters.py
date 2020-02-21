@@ -11,7 +11,7 @@ from bpy.utils import register_class, unregister_class
 from .accurate_region_border import AccurateRegionBorder
 
 
-class ACCURATE_RENDER_BORDER_Parameters(PropertyGroup):
+class ACCURATE_REGION_BORDER_Parameters(PropertyGroup):
 
     x0: IntProperty(
         name='Left-Top X',
@@ -140,14 +140,14 @@ class ACCURATE_RENDER_BORDER_Parameters(PropertyGroup):
 
 
 def register():
-    register_class(ACCURATE_RENDER_BORDER_Parameters)
+    register_class(ACCURATE_REGION_BORDER_Parameters)
     # camera
-    Scene.accurate_region_border = PointerProperty(type=ACCURATE_RENDER_BORDER_Parameters)
+    Scene.accurate_region_border = PointerProperty(type=ACCURATE_REGION_BORDER_Parameters)
     # viewport
-    WindowManager.accurate_region_border = CollectionProperty(type=ACCURATE_RENDER_BORDER_Parameters)
+    WindowManager.accurate_region_border = CollectionProperty(type=ACCURATE_REGION_BORDER_Parameters)
 
 
 def unregister():
     del WindowManager.accurate_region_border
     del Scene.accurate_region_border
-    unregister_class(ACCURATE_RENDER_BORDER_Parameters)
+    unregister_class(ACCURATE_REGION_BORDER_Parameters)

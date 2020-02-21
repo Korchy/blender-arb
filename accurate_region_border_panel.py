@@ -8,8 +8,8 @@ from bpy.types import Panel
 from bpy.utils import register_class, unregister_class
 
 
-class ACCURATE_RENDER_BORDER_PT_panel(Panel):
-    bl_idname = 'ACCURATE_RENDER_BORDER_PT_panel'
+class ACCURATE_REGION_BORDER_PT_panel(Panel):
+    bl_idname = 'ACCURATE_REGION_BORDER_PT_panel'
     bl_label = 'ARB'
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
@@ -54,8 +54,8 @@ class ACCURATE_RENDER_BORDER_PT_panel(Panel):
 
 
 def register():
-    register_class(ACCURATE_RENDER_BORDER_PT_panel)
+    register_class(ACCURATE_REGION_BORDER_PT_panel)
 
 
 def unregister():
-    unregister_class(ACCURATE_RENDER_BORDER_PT_panel)
+    unregister_class(ACCURATE_REGION_BORDER_PT_panel)
