@@ -7,7 +7,6 @@
 from . import accurate_region_border_parameters
 from . import accurate_region_border_ops
 from . import accurate_region_border_panel
-from . import accurate_region_border_preferences
 from .addon import Addon
 
 
@@ -26,7 +25,6 @@ bl_info = {
 
 def register():
     if not Addon.dev_mode():
-        accurate_region_border_preferences.register()
         accurate_region_border_parameters.register()
         accurate_region_border_ops.register()
         accurate_region_border_panel.register()
@@ -39,7 +37,6 @@ def unregister():
         accurate_region_border_panel.unregister()
         accurate_region_border_ops.unregister()
         accurate_region_border_parameters.unregister()
-        accurate_region_border_preferences.unregister()
 
 
 if __name__ == '__main__':
