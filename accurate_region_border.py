@@ -99,7 +99,7 @@ class AccurateRegionBorder:
     @staticmethod
     def area_mode(context):
         # area mode
-        if not context.area:
+        if not context.area or not hasattr(context.area.spaces[0], 'region_3d'):
             # for animation from timeline - only for camera
             return 'CAMERA'
         else:

@@ -18,7 +18,9 @@ class ACCURATE_REGION_BORDER_PT_panel(Panel):
     def draw(self, context):
         layout = self.layout
         if context.area.spaces[0].region_3d.view_perspective == 'CAMERA':
-            layout.prop(context.scene.render, 'use_border', icon='SELECT_SET')
+            row = layout.row()
+            row.prop(context.scene.render, 'use_border', icon='SELECT_SET')
+            row.operator('accurate_region_border.render_sequence', icon='RENDER_ANIMATION', text='')
             layout.prop(context.scene.accurate_region_border, 'x0')
             layout.prop(context.scene.accurate_region_border, 'y0')
             if context.scene.accurate_region_border.mode == 'Top-Bottom':
