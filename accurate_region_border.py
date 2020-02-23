@@ -99,7 +99,11 @@ class AccurateRegionBorder:
     @staticmethod
     def area_mode(context):
         # area mode
-        return context.area.spaces[0].region_3d.view_perspective
+        if not context.area:
+            # for animation from timeline - only for camera
+            return 'CAMERA'
+        else:
+            return context.area.spaces[0].region_3d.view_perspective
 
     @classmethod
     def border_coordinates(cls, context):
