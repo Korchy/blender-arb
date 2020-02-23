@@ -12,7 +12,7 @@ from .accurate_region_border import AccurateRegionBorder
 class ACCURATE_REGION_BORDER_OT_sync(Operator):
     bl_idname = 'accurate_region_border.sync'
     bl_label = 'Sync'
-    bl_description = 'Sync accurate region border with real border values'
+    bl_description = 'Get values from scene'
     bl_options = {'REGISTER', 'UNDO'}
 
     def execute(self, context):

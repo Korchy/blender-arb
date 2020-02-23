@@ -17,9 +17,9 @@ bl_info = {
     'version': (1, 0, 0),
     'blender': (2, 82, 0),
     'location': 'N-Panel > ARB',
-    'wiki_url': 'https://b3d.interplanety.org/en/accurate-render-border-add-on/',
-    'tracker_url': 'https://b3d.interplanety.org/en/accurate-render-border-add-on/',
-    'description': 'Allows to set render border with accurate values'
+    'wiki_url': 'https://b3d.interplanety.org/en/blender-add-on-accurate-region-border/',
+    'tracker_url': 'https://b3d.interplanety.org/en/blender-add-on-accurate-region-border/',
+    'description': 'Allows to set render region border with accurate values'
 }
 
 

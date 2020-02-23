@@ -1,12 +1,20 @@
-# Accurate Render Border
+# Accurate Region Border
 
-Blender add-on to set render border with accurate values.
+Blender add-on to set render region border with accurate values.
+
+<img src="https://b3d.interplanety.org/wp-content/upload_content/2020/02/preview_01_1200x600-1-400x200.jpg" >
 
 Add-on functionality
 -
-In the "3D Viewport" window - N-Panel set values in the "ARB" tab and press button "Set Accurate Values"
+In the "3D Viewport" window - N-Panel set values in the "ARB" tab to control the region render border.
 
-<img src="http://b3d.interplanety.org/wp-content/upload_content/2016/10/00-3-400x334.jpg" title="Accurate Render Border">
+<img src="https://b3d.interplanety.org/wp-content/upload_content/2020/02/preview_02_1200x600-1-400x200.jpg" ><p>
+
+Region border values can be animated.
+
+Render region borders in all the viewport and camera areas can be controlled separately.
+
+<img src="https://b3d.interplanety.org/wp-content/upload_content/2020/02/preview_03_1200x600-1-400x200.jpg" ><p>
 
 Current add-on version:
 -
@@ -22,20 +30,10 @@ Location and call:
 
 Installation:
 -
-Download the *.zip archive with the add-on distributive.
-
-The "Preferences" window — Add-ons — Install... — specify the downloaded archive.
+- Download the *.zip archive with the add-on distributive.
+- The "Preferences" window — Add-ons — Install... — specify the downloaded archive.
 
 Version history
 -
 1.0.0
-- Updated for Blender 2.8
-- Version for Blender 2.7x frozen
-
-0.0.2
-
-- Added "Width-Height" checker to change border Right-Bottom coordinates to Width-Height values
-
-0.0.1
-
 - Release
