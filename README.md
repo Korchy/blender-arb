@@ -1,6 +1,6 @@
 # Accurate Region Border
 
-Blender add-on to set render region border with accurate values.
+Blender add-on for setting render region border with accurate values and easily manage it.
 
 <img src="https://b3d.interplanety.org/wp-content/upload_content/2020/02/preview_01_1200x600-1-400x200.jpg" >
 
