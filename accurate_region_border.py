@@ -45,6 +45,7 @@ class AccurateRegionBorder:
         for scene in scenes:
             if scene != src_scene:
                 scene.render.use_border = src_scene.render.use_border
+                scene.accurate_region_border.mode = src_scene.accurate_region_border.mode
                 scene.accurate_region_border.x0 = src_scene.accurate_region_border.x0
                 scene.accurate_region_border.y0 = src_scene.accurate_region_border.y0
                 scene.accurate_region_border.x1 = src_scene.accurate_region_border.x1
