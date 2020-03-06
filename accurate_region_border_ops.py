@@ -4,6 +4,7 @@
 # GitHub
 #   https://github.com/Korchy/blender-arb
 
+import bpy
 from bpy.types import Operator
 from bpy.utils import register_class, unregister_class
 from .accurate_region_border import AccurateRegionBorder
@@ -52,13 +53,29 @@ class ACCURATE_REGION_BORDER_OT_cancel_render_sequence(Operator):
         return {'FINISHED'}
 
 
+class ACCURATE_REGION_BORDER_OT_to_all_scenes(Operator):
+    bl_idname = 'accurate_region_border.to_all_scenes'
+    bl_label = 'To All Scenes'
+    bl_description = 'Translate current region border to all scenes'
+    bl_options = {'REGISTER', 'UNDO'}
+
+    def execute(self, context):
+        AccurateRegionBorder.to_all_scenes(
+            src_scene=context.scene,
+            scenes=bpy.data.scenes
+        )
+        return {'FINISHED'}
+
+
 def register():
     register_class(ACCURATE_REGION_BORDER_OT_sync)
     register_class(ACCURATE_REGION_BORDER_OT_render_sequence)
     register_class(ACCURATE_REGION_BORDER_OT_cancel_render_sequence)
+    register_class(ACCURATE_REGION_BORDER_OT_to_all_scenes)
 
 
 def unregister():
+    unregister_class(ACCURATE_REGION_BORDER_OT_to_all_scenes)
     unregister_class(ACCURATE_REGION_BORDER_OT_cancel_render_sequence)
     unregister_class(ACCURATE_REGION_BORDER_OT_render_sequence)
     unregister_class(ACCURATE_REGION_BORDER_OT_sync)

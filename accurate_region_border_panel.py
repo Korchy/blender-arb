@@ -29,7 +29,7 @@ class ACCURATE_REGION_BORDER_PT_panel(Panel):
             else:
                 layout.prop(context.scene.accurate_region_border, 'x1', text='Width')
                 layout.prop(context.scene.accurate_region_border, 'y1', text='Height')
-            split = layout.split(factor=0.9)
+            split = layout.split(factor=0.8)
             col = split.column()
             row = col.row()
             row.prop(context.scene.accurate_region_border, 'mode', expand=True)
@@ -47,12 +47,14 @@ class ACCURATE_REGION_BORDER_PT_panel(Panel):
             else:
                 layout.prop(area_accurate_region_border_parameters, 'x1', text='Width')
                 layout.prop(area_accurate_region_border_parameters, 'y1', text='Height')
-            split = layout.split(factor=0.9)
+            split = layout.split(factor=0.8)
             col = split.column()
             row = col.row()
             row.prop(area_accurate_region_border_parameters, 'mode', expand=True)
         col = split.column()
-        col.operator('accurate_region_border.sync', icon='FILE_REFRESH', text='')
+        row = col.row()
+        row.operator('accurate_region_border.sync', icon='FILE_REFRESH', text='')
+        row.operator('accurate_region_border.to_all_scenes', icon='CON_LOCLIKE', text='')
 
 
 def register():

@@ -39,6 +39,26 @@ class AccurateRegionBorder:
             border_parameters.y1 = real_coords['y1'] - real_coords['y0']
 
     @classmethod
+    def to_all_scenes(cls, src_scene, scenes):
+        # translate border parameters from src_scene to all scenes
+        # for camera
+        for scene in scenes:
+            if scene != src_scene:
+                scene.render.use_border = src_scene.render.use_border
+                scene.accurate_region_border.x0 = src_scene.accurate_region_border.x0
+                scene.accurate_region_border.y0 = src_scene.accurate_region_border.y0
+                scene.accurate_region_border.x1 = src_scene.accurate_region_border.x1
+                scene.accurate_region_border.y1 = src_scene.accurate_region_border.y1
+                scene.render.border_min_x = src_scene.accurate_region_border.x0 / scene.render.resolution_x
+                scene.render.border_max_y = 1 - src_scene.accurate_region_border.y0 / scene.render.resolution_y
+                if src_scene.accurate_region_border.mode == 'Top-Bottom':
+                    scene.render.border_max_x = src_scene.accurate_region_border.x1 / scene.render.resolution_x
+                    scene.render.border_min_y = 1 - src_scene.accurate_region_border.y0 / scene.render.resolution_y
+                elif src_scene.accurate_region_border.mode == 'Width-Height':
+                    scene.render.border_max_x = (src_scene.accurate_region_border.x0 + src_scene.accurate_region_border.x1) / scene.render.resolution_x
+                    scene.render.border_min_y = 1 - (src_scene.accurate_region_border.y0 + src_scene.accurate_region_border.y1) / scene.render.resolution_y
+
+    @classmethod
     def update_region_border_x0(cls, border_parameters, context):
         # update border_min_x
         if cls.area_mode(context=context) == 'CAMERA':
