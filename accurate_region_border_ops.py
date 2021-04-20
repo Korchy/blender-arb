@@ -57,7 +57,7 @@ class ACCURATE_REGION_BORDER_OT_to_all_scenes(Operator):
     bl_idname = 'accurate_region_border.to_all_scenes'
     bl_label = 'To All Scenes'
     bl_description = 'Translate current region border to all scenes'
-    bl_options = {'REGISTER', 'UNDO'}
+    bl_options = {'REGISTER'}
 
     def execute(self, context):
         AccurateRegionBorder.to_all_scenes(
@@ -65,6 +65,13 @@ class ACCURATE_REGION_BORDER_OT_to_all_scenes(Operator):
             scenes=bpy.data.scenes
         )
         return {'FINISHED'}
+
+    def invoke(self, context, event):
+        return context.window_manager.invoke_props_dialog(self, width=200)
+
+    def draw(self, context):
+        layout = self.layout
+        layout.label(text='Are you sure?')
 
 
 def register():

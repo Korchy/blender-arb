@@ -18,11 +18,11 @@ Render region borders in all the viewport and camera areas can be controlled sep
 
 Current add-on version:
 -
-1.1.0.
+1.1.1.
 
 Blender versions:
 -
-2.82, 2.83, 2.90
+2.82, 2.83, 2.90, 2.91, 2.92
 
 Location and call:
 -
@@ -35,6 +35,10 @@ Installation:
 
 Version history
 -
+1.1.1
+- Changed names for more convenience
+- Added confirmation for pressing "To All Scenes" button
+
 1.1.0
 - Translate border parameters to all scenes option added
 

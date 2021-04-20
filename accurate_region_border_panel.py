@@ -21,11 +21,11 @@ class ACCURATE_REGION_BORDER_PT_panel(Panel):
             row = layout.row()
             row.prop(context.scene.render, 'use_border', icon='SELECT_SET')
             row.operator('accurate_region_border.render_sequence', icon='RENDER_ANIMATION', text='')
-            layout.prop(context.scene.accurate_region_border, 'x0')
-            layout.prop(context.scene.accurate_region_border, 'y0')
+            layout.prop(context.scene.accurate_region_border, 'x0', text='Left')
+            layout.prop(context.scene.accurate_region_border, 'y0', text='Up')
             if context.scene.accurate_region_border.mode == 'Top-Bottom':
-                layout.prop(context.scene.accurate_region_border, 'x1')
-                layout.prop(context.scene.accurate_region_border, 'y1')
+                layout.prop(context.scene.accurate_region_border, 'x1', text='Right')
+                layout.prop(context.scene.accurate_region_border, 'y1', text='Down')
             else:
                 layout.prop(context.scene.accurate_region_border, 'x1', text='Width')
                 layout.prop(context.scene.accurate_region_border, 'y1', text='Height')
