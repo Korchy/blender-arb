@@ -21,6 +21,7 @@ class ACCURATE_REGION_BORDER_PT_panel(Panel):
             # camera
             row = layout.row()
             row.prop(context.scene.render, 'use_border', icon='SELECT_SET')
+            row.prop(context.scene.render, 'use_crop_to_border', icon_only=True, icon='OBJECT_HIDDEN')
             row.operator('accurate_region_border.render_sequence', icon='RENDER_ANIMATION', text='')
             if context.scene.accurate_region_border.mode == 'Top-Bottom':
                 layout.prop(context.scene.accurate_region_border, 'x0', text='Left')
