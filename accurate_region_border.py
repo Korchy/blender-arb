@@ -51,13 +51,13 @@ class AccurateRegionBorder:
                 scene.accurate_region_border.x1 = src_scene.accurate_region_border.x1
                 scene.accurate_region_border.y1 = src_scene.accurate_region_border.y1
                 scene.render.border_min_x = src_scene.accurate_region_border.x0 / scene.render.resolution_x
-                scene.render.border_max_y = 1 - src_scene.accurate_region_border.y0 / scene.render.resolution_y
+                scene.render.border_min_y = src_scene.accurate_region_border.y0 / scene.render.resolution_y
                 if src_scene.accurate_region_border.mode == 'Top-Bottom':
                     scene.render.border_max_x = src_scene.accurate_region_border.x1 / scene.render.resolution_x
-                    scene.render.border_min_y = 1 - src_scene.accurate_region_border.y0 / scene.render.resolution_y
+                    scene.render.border_max_y = src_scene.accurate_region_border.y1 / scene.render.resolution_y
                 elif src_scene.accurate_region_border.mode == 'Width-Height':
                     scene.render.border_max_x = (src_scene.accurate_region_border.x0 + src_scene.accurate_region_border.x1) / scene.render.resolution_x
-                    scene.render.border_min_y = 1 - (src_scene.accurate_region_border.y0 + src_scene.accurate_region_border.y1) / scene.render.resolution_y
+                    scene.render.border_max_y = (src_scene.accurate_region_border.y0 + src_scene.accurate_region_border.y1) / scene.render.resolution_y
 
     @classmethod
     def update_region_border_x0(cls, border_parameters, context):
@@ -75,12 +75,12 @@ class AccurateRegionBorder:
 
     @classmethod
     def update_region_border_y0(cls, border_parameters, context):
-        # update border_max_y
+        # update border_min_y
         if cls.area_mode(context=context) == 'CAMERA':
-            context.scene.render.border_max_y = 1 - border_parameters.y0 / cls.max_y(context=context)
+            context.scene.render.border_min_y = border_parameters.y0 / cls.max_y(context=context)
         else:
             # viewport
-            context.space_data.render_border_max_y = 1 - border_parameters.y0 / cls.max_y(context=context)
+            context.space_data.render_border_min_y = border_parameters.y0 / cls.max_y(context=context)
         if border_parameters.mode == 'Top-Bottom':
             if border_parameters.y1 < border_parameters.y0:
                 border_parameters.y1 = border_parameters.y0
@@ -104,18 +104,18 @@ class AccurateRegionBorder:
 
     @classmethod
     def update_region_border_y1(cls, border_parameters, context):
-        # update border_min_y
+        # update border_max_y
         if cls.area_mode(context=context) == 'CAMERA':
             if border_parameters.mode == 'Top-Bottom':
-                context.scene.render.border_min_y = 1 - border_parameters.y1 / cls.max_y(context=context)
+                context.scene.render.border_max_y = border_parameters.y1 / cls.max_y(context=context)
             elif border_parameters.mode == 'Width-Height':
-                context.scene.render.border_min_y = 1 - (border_parameters.y1 + border_parameters.y0) / cls.max_y(context=context)
+                context.scene.render.border_max_y = (border_parameters.y1 + border_parameters.y0) / cls.max_y(context=context)
         else:
             # viewport
             if border_parameters.mode == 'Top-Bottom':
-                context.space_data.render_border_min_y = 1 - border_parameters.y1 / cls.max_y(context=context)
+                context.space_data.render_border_max_y = border_parameters.y1 / cls.max_y(context=context)
             elif border_parameters.mode == 'Width-Height':
-                context.space_data.render_border_min_y = 1 - (border_parameters.y1 + border_parameters.y0) / cls.max_y(context=context)
+                context.space_data.render_border_max_y = (border_parameters.y1 + border_parameters.y0) / cls.max_y(context=context)
 
     @staticmethod
     def area_mode(context):
@@ -130,17 +130,25 @@ class AccurateRegionBorder:
     def border_coordinates(cls, context):
         # get real border coordinates (x0, y0, x1, y1)
         if cls.area_mode(context=context) == 'CAMERA':
+            min_x = min(context.scene.render.border_min_x, context.scene.render.border_max_x)
+            max_x = max(context.scene.render.border_min_x, context.scene.render.border_max_x)
+            min_y = min(context.scene.render.border_min_y, context.scene.render.border_max_y)
+            max_y = max(context.scene.render.border_min_y, context.scene.render.border_max_y)
             return {
-                'x0': round(context.scene.render.border_min_x * cls.max_x(context=context)),
-                'y0': round((1 - context.scene.render.border_max_y) * cls.max_y(context=context)),
-                'x1': round(context.scene.render.border_max_x * cls.max_x(context=context)),
-                'y1': round((1 - context.scene.render.border_min_y) * cls.max_y(context=context))
+                'x0': round(min_x * cls.max_x(context=context)),
+                'y0': round(min_y * cls.max_y(context=context)),
+                'x1': round(max_x * cls.max_x(context=context)),
+                'y1': round(max_y * cls.max_y(context=context))
             }
         else:
             # viewport
+            min_x = min(context.space_data.render_border_min_x, context.space_data.render_border_max_x)
+            max_x = max(context.space_data.render_border_min_x, context.space_data.render_border_max_x)
+            min_y = min(context.space_data.render_border_min_y, context.space_data.render_border_max_y)
+            max_y = max(context.space_data.render_border_min_y, context.space_data.render_border_max_y)
             return {
-                'x0': round(context.space_data.render_border_min_x * cls.max_x(context=context)),
-                'y0': round((1 - context.space_data.render_border_max_y) * cls.max_y(context=context)),
-                'x1': round(context.space_data.render_border_max_x * cls.max_x(context=context)),
-                'y1': round((1 - context.space_data.render_border_min_y) * cls.max_y(context=context))
+                'x0': round(min_x * cls.max_x(context=context)),
+                'y0': round(min_y * cls.max_y(context=context)),
+                'x1': round(max_x * cls.max_x(context=context)),
+                'y1': round(max_y * cls.max_y(context=context))
             }
